@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UNLOCK THE DOWNLOAD LINK</title>
+  <style>
+    body {
+      background: #0d0d0d; /* solid dark background */
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      background: linear-gradient(90deg, #ff8a00, #e52e71);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Card style */
+    .task {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 25px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
+    }
+    .task:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Button base */
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 80%;
+      margin-top: 8px;
+    }
+
+    .btn:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none; /* ensures disabled button cannot be clicked */
+    }
+
+    .success {
+      background: linear-gradient(90deg, #11998e, #38ef7d) !important;
+    }
+
+    .success::after {
+      content: " ✅";
+    }
+
+    /* Progress bar container */
+    .r-progress-bar {
+      width: 100%;
+      margin: 15px auto 0;
+      background: #1a1a1a;
+      border-radius: 50px;
+      overflow: hidden;
+      height: 14px;
+      visibility: hidden;
+    }
+
+    /* Track */
+    .r-bar {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: #0e0e0e;
+    }
+
+    /* Fill */
+    .r-progress {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #ff416c, #ff4b2b, #ff416c);
+      background-size: 200% auto;
+      width: 0%;
+      transition: width 0.3s ease;
+      animation: moveGradient 2s linear infinite;
+    }
+
+    @keyframes moveGradient {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* Overall progress tracker */
+    #overall {
+      margin: 15px auto 30px;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    .overall-bar {
+      width: 90%;
+      max-width: 420px;
+      height: 16px;
+      border-radius: 50px;
+      background: #1a1a1a;
+      margin: 10px auto;
+      overflow: hidden;
+    }
+    .overall-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      transition: width 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>UNLOCK THE DOWNLOAD LINK</h1>
+
+  <!-- Overall Progress -->
+  <div id="overall">Unlock Progress 0/2</div>
+  <div class="overall-bar">
+    <div class="overall-fill" id="overall-fill"></div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="task">
+    <button id="subscribe" class="btn"
+      onclick="handleClick(this, 'https://youtube.com/@ptd_king_ofc')">
+      SUBSCRIBE
+    </button>
+    <div class="r-progress-bar">
+      <span class="r-bar">
+        <span class="r-progress" id="progress-sub"></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="task">
+    <button id="like" class="btn"
+      onclick="handleClick(this, 'https://youtu.be/nektul64GY8?si=wPW72TnbDo1G3LiN')"
+      disabled>
+      LIKE TO THE VIDEO
+    </button>
+    <div class="r-progress-bar">
+      <span class="r-bar">
+        <span class="r-progress" id="progress-like"></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="task">
+    <a id="download" class="btn" href="#" disabled style="pointer-events:none; opacity:0.5;">
+      DOWNLOAD NOW
+    </a>
+  </div>
+
+  <script>
+    let subscribeDone = false;
+    let likeDone = false;
+    let totalDone = 0;
+
+    function updateOverall() {
+      totalDone = (subscribeDone ? 1 : 0) + (likeDone ? 1 : 0);
+      document.getElementById("overall").innerText = `Unlock Progress ${totalDone}/2`;
+      document.getElementById("overall-fill").style.width = (totalDone / 2) * 100 + "%";
+    }
+
+    function handleClick(button, url) {
+      // open link
+      window.open(url, '_blank');
+
+      // show progress bar
+      const progressId = button.id === "subscribe" ? "progress-sub" : "progress-like";
+      const progressBar = document.getElementById(progressId).parentElement.parentElement;
+      progressBar.style.visibility = "visible";
+
+      button.textContent = "Checking...";
+      button.disabled = true;
+
+      // animate progress bar
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 100 / (8 * 10); // 100% over 8s (100ms steps)
+        if (progress >= 100) progress = 100;
+        document.getElementById(progressId).style.width = progress + "%";
+      }, 100);
+
+      // after 8s complete
+      setTimeout(() => {
+        clearInterval(interval);
+        document.getElementById(progressId).style.width = "100%";
+        button.classList.add("success");
+        button.textContent = button.textContent.split(" ")[0] + " Successful";
+
+        if (button.id === "subscribe") {
+          subscribeDone = true;
+          document.getElementById("like").disabled = false;
+        }
+
+        if (button.id === "like") {
+          likeDone = true;
+        }
+
+        updateOverall();
+
+        // unlock download ONLY when both are done
+        if (subscribeDone && likeDone) {
+          const downloadBtn = document.getElementById("download");
+          downloadBtn.classList.add("success");
+          downloadBtn.setAttribute("href", "https://ptdking.blogspot.com/2025/02/review-video-new-immune-mod-whatsapp.html");
+          downloadBtn.removeAttribute("disabled");
+          downloadBtn.style.pointerEvents = "auto";
+          downloadBtn.style.opacity = "1";
+        }
+      }, 8000);
+    }
+  </script>
+
+</body>
+</html>
